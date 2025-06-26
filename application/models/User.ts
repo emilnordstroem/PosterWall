@@ -1,22 +1,68 @@
-import {PostableInterface} from "./Postable.interface";
+import {Postable} from "./Postable.interface";
+import {TextualPost} from "./TextualPost";
+import {Userable} from "./Userable.interface";
+import {Subscription} from "./Subscription";
+import {Subscribable} from "./Subscribable.interface";
 
-export class User {
-    private _userName: string;
-    private _postedPosts: PostableInterface[];
+export class User implements Userable {
+    private _username: string;
+    private _dateOfBirth: Date;
+    private _posts: Set<Postable>;
+    private _subscriptions: Set<Subscription>;
 
-    constructor(userName: string) {
-        this._userName = userName;
+    constructor(username: string, dateOfBirth: Date) {
+        this._username = username;
+        this._dateOfBirth = dateOfBirth;
+        this._posts = new Set<Postable>();
+        this._subscriptions = new Set<Subscription>();
+    };
+
+    createPost(content: string): Postable {
+        const newTextualPost: Postable = new TextualPost(this, content);
+        this.addPost(newTextualPost);
+        return newTextualPost;
     }
 
-    public postContent(content: string, dateOfPost : Date, postedBy : User){
+    deletePost(post: Postable): void {
+        this._posts.delete(post);
     }
 
-    get userName(): string {
-        return this._userName;
+    getPosts(): Set<Postable> {
+        return new Set<Postable>(this._posts);
     }
 
-    get postedPosts(): PostableInterface[] {
-        return [this._postedPosts];
+    createSubscription(subscribable: Subscribable): Subscription {
+        const subscription : Subscription = new Subscription(this, subscribable)
+        this.subscribeTo(subscription)
+        return subscription;
+    }
+
+    subscribeTo(subscription : Subscription) : void {
+        this._subscriptions.add(subscription);
+    }
+
+    unsubscribeTo(subscription : Subscription): void {
+        this._subscriptions.delete(subscription);
+    }
+
+    getSubscriptions(): Set<Subscription> {
+        return new Set<Subscription>(this._subscriptions);
+    }
+
+    private addPost(post : Postable) : void{
+        this._posts.add(post);
+    }
+
+    public removePost(post : Postable) : void{
+        this._posts.delete(post);
+    }
+
+    get getUsername(): string {
+        return this._username;
+    }
+
+    get getDateOfBirth(): Date {
+        return this._dateOfBirth;
     }
 
 }

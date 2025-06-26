@@ -1,5 +1,5 @@
-import {ReactableInterface} from "./Reactable.interface";
+import {Votable} from "./Votable.interface";
 
-export interface PostableInterface extends ReactableInterface {
+export interface Postable extends Votable {
 
 }
