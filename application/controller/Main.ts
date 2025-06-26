@@ -9,10 +9,13 @@ const controller : Controller = new Controller();
 const user : User = controller.createUser("Emil", new Date());
 const post : Post = controller.createPost(user, "Hello, World!");
 const wall : Wall = controller.createWall("Q/A Coding", "Post questions about coding");
+const subscription : Subscription = user.createSubscription(wall);
 
 controller.postOnWall(user, post, wall);
+console.log(wall.getSubscribers + " Number of posts: " + wall.getPosts.size)
 
 controller.subscribeTo(user, wall);
+wall.addObserver(subscription);
 controller.postOnWall(user, post, wall);
 console.log(wall.getSubscribers + " Number of posts: " + wall.getPosts.size)
 

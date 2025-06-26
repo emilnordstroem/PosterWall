@@ -56,7 +56,8 @@ export class Controller {
 
     public postOnWall(user : Userable, post : Post, subscribable : Subscribable) : void {
         if (user.isSubscribedTo(subscribable)) {
-            subscribable.addPostable(post)
+            subscribable.addPostable(post);
+            subscribable.notifyObservers();
         }
     }
 
