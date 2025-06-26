@@ -1,5 +1,5 @@
 import {Post} from "./Post";
-import {User} from "./User";
+import {User} from "../userable/User";
 
 export class TextualPost extends Post {
     private _content: String;

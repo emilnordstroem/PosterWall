@@ -1,8 +1,8 @@
-import {Postable} from "./Postable.interface";
-import {TextualPost} from "./TextualPost";
+import {Postable} from "../postable/Postable.interface";
+import {TextualPost} from "../postable/TextualPost";
 import {Userable} from "./Userable.interface";
-import {Subscription} from "./Subscription";
-import {Subscribable} from "./Subscribable.interface";
+import {Subscription} from "../subscription/Subscription";
+import {Subscribable} from "../subscribable/Subscribable.interface";
 
 export class User implements Userable {
     private _username: string;
@@ -31,17 +31,32 @@ export class User implements Userable {
         return new Set<Postable>(this._posts);
     }
 
+    isSubscribedTo(subscribable: Subscribable): boolean {
+        let alreadySubscribed = false;
+        this._subscriptions.forEach((currentSubscription : Subscription) => {
+            if (currentSubscription.getSubscribedTo == subscribable) {
+                alreadySubscribed = true;
+            }
+        });
+        return alreadySubscribed;
+    }
+
     createSubscription(subscribable: Subscribable): Subscription {
         const subscription : Subscription = new Subscription(this, subscribable)
-        this.subscribeTo(subscription)
+        this._subscriptions.add(subscription);
         return subscription;
     }
 
-    subscribeTo(subscription : Subscription) : void {
-        this._subscriptions.add(subscription);
+    findSubscription(subscribable: Subscribable) : Subscription | undefined {
+        for (const subscription of this._subscriptions) {
+            if (subscription.getSubscribedTo === subscribable) {
+                return subscription;
+            }
+        }
+        return undefined;
     }
 
-    unsubscribeTo(subscription : Subscription): void {
+    unsubscribeFrom(subscription : Subscription): void {
         this._subscriptions.delete(subscription);
     }
 

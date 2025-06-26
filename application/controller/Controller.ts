@@ -1,9 +1,9 @@
-import {User} from "../models/User";
-import {Postable} from "../models/Postable.interface";
-import {Wall} from "../models/Wall";
-import {Subscribable} from "../models/Subscribable.interface";
-import {Userable} from "../models/Userable.interface";
-import {Subscription} from "../models/Subscription";
+import {User} from "../models/userable/User";
+import {Postable} from "../models/postable/Postable.interface";
+import {Wall} from "../models/subscribable/Wall";
+import {Subscribable} from "../models/subscribable/Subscribable.interface";
+import {Userable} from "../models/userable/Userable.interface";
+import {Observer} from "../models/subscription/Observer.interface";
 
 export class Controller {
 
@@ -27,36 +27,43 @@ export class Controller {
         return newWall;
     }
 
-    public subscribeTo(subscriber : Userable, subscribeTo : Subscribable) : void {
-        let alreadySubscribed : boolean = false;
-        const proxy : Set<Subscription> = subscriber.getSubscriptions();
-        proxy.forEach((currentSubscription : Subscription) => {
-            if (currentSubscription.getSubscribedTo == subscribeTo) {
-                alreadySubscribed  = true;
-            }
-        });
-        if (!alreadySubscribed) {
-            subscriber.createSubscription(subscribeTo);
-            subscribeTo.addSubscriber();
+    public subscribeTo(user : Userable, subscribable : Subscribable) : void {
+        if (!user.isSubscribedTo(subscribable)) {
+            user.createSubscription(subscribable);
+            subscribable.addSubscriber();
         }
     }
 
-    public unsubscribeTo(subscriber : Userable, subscribedTo : Subscribable) : void {
-        const proxy : Set<Subscription> = subscriber.getSubscriptions();
-        proxy.forEach((subscription : Subscription) => {
-            if (subscription.getSubscribedTo == subscribedTo) {
-                subscriber.unsubscribeTo(subscription);
-                subscribedTo.removeSubscriber();
-            }
-        });
+    public turnOnNotifications (observer : Observer, subscribable : Subscribable) : void {
+        subscribable.addObserver(observer);
     }
 
-    public postOnWall(postable : Postable, subscribable : Subscribable) : void {
-        subscribable.addPostable(postable)
+    public turnOffNotifications (observer : Observer, subscribable : Subscribable) {
+        subscribable.removeObserver(observer);
     }
 
-    public removeFromWall(postable : Postable, subscribable : Subscribable) : void {
-        subscribable.removePostable(postable);
+    public notifyAllObservers (subscribable : Subscribable) : void {
+        subscribable.notifyObservers();
+    }
+
+    public unsubscribeFrom(user : Userable, subscribable : Subscribable) : void {
+        const subscription = user.findSubscription(subscribable);
+        if (subscription) {
+            user.unsubscribeFrom(subscription);
+            subscribable.removeSubscriber();
+        }
+    }
+
+    public postOnWall(user : Userable, postable : Postable, subscribable : Subscribable) : void {
+        if (user.isSubscribedTo(subscribable)) {
+            subscribable.addPostable(postable)
+        }
+    }
+
+    public removeFromWall(user : Userable, postable : Postable, subscribable : Subscribable) : void {
+        if (user.isSubscribedTo(subscribable)) {
+            subscribable.removePostable(postable);
+        }
     }
 
 }

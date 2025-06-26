@@ -1,5 +1,5 @@
 import {Postable} from "./Postable.interface";
-import {User} from "./User";
+import {User} from "../userable/User";
 
 export abstract class Post implements Postable {
     private _postedBy : User;
