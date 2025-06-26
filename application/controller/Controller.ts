@@ -1,9 +1,9 @@
 import {User} from "../models/userable/User";
-import {Postable} from "../models/postable/Postable.interface";
 import {Wall} from "../models/subscribable/Wall";
 import {Subscribable} from "../models/subscribable/Subscribable.interface";
 import {Userable} from "../models/userable/Userable.interface";
 import {Observer} from "../models/subscription/Observer.interface";
+import {Post} from "../models/postable/Post";
 
 export class Controller {
 
@@ -15,8 +15,8 @@ export class Controller {
         return newUser;
     }
 
-    public createPost(user : User, content : any) : Postable {
-        const newPost : Postable = user.createPost(content);
+    public createPost(user : User, content : any) : Post {
+        const newPost : Post = user.createPost(content);
         // storage
         return newPost;
     }
@@ -54,15 +54,15 @@ export class Controller {
         }
     }
 
-    public postOnWall(user : Userable, postable : Postable, subscribable : Subscribable) : void {
+    public postOnWall(user : Userable, post : Post, subscribable : Subscribable) : void {
         if (user.isSubscribedTo(subscribable)) {
-            subscribable.addPostable(postable)
+            subscribable.addPostable(post)
         }
     }
 
-    public removeFromWall(user : Userable, postable : Postable, subscribable : Subscribable) : void {
+    public removeFromWall(user : Userable, post : Post, subscribable : Subscribable) : void {
         if (user.isSubscribedTo(subscribable)) {
-            subscribable.removePostable(postable);
+            subscribable.removePostable(post);
         }
     }
 

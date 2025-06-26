@@ -1,7 +1,6 @@
-import {Postable} from "./Postable.interface";
 import {User} from "../userable/User";
 
-export abstract class Post implements Postable {
+export abstract class Post {
     private _postedBy : User;
     private _dateOfPost: Date;
     private _upvote: number;

@@ -1,13 +1,13 @@
 import {Controller} from "./Controller";
 import {User} from "../models/userable/User";
-import {Postable} from "../models/postable/Postable.interface";
 import {Wall} from "../models/subscribable/Wall";
 import {Subscription} from "../models/subscription/Subscription";
+import {Post} from "../models/postable/Post";
 
 const controller : Controller = new Controller();
 
 const user : User = controller.createUser("Emil", new Date());
-const post : Postable = controller.createPost(user, "Hello, World!");
+const post : Post = controller.createPost(user, "Hello, World!");
 const wall : Wall = controller.createWall("Q/A Coding", "Post questions about coding");
 
 controller.postOnWall(user, post, wall);

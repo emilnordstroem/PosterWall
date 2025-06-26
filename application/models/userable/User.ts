@@ -1,34 +1,34 @@
-import {Postable} from "../postable/Postable.interface";
 import {TextualPost} from "../postable/TextualPost";
 import {Userable} from "./Userable.interface";
 import {Subscription} from "../subscription/Subscription";
 import {Subscribable} from "../subscribable/Subscribable.interface";
+import {Post} from "../postable/Post";
 
 export class User implements Userable {
     private _username: string;
     private _dateOfBirth: Date;
-    private _posts: Set<Postable>;
+    private _posts: Set<Post>;
     private _subscriptions: Set<Subscription>;
 
     constructor(username: string, dateOfBirth: Date) {
         this._username = username;
         this._dateOfBirth = dateOfBirth;
-        this._posts = new Set<Postable>();
+        this._posts = new Set<Post>();
         this._subscriptions = new Set<Subscription>();
     };
 
-    createPost(content: string): Postable {
-        const newTextualPost: Postable = new TextualPost(this, content);
+    createPost(content: string): Post {
+        const newTextualPost: Post = new TextualPost(this, content);
         this.addPost(newTextualPost);
         return newTextualPost;
     }
 
-    deletePost(post: Postable): void {
+    deletePost(post: Post): void {
         this._posts.delete(post);
     }
 
-    getPosts(): Set<Postable> {
-        return new Set<Postable>(this._posts);
+    getPosts(): Set<Post> {
+        return new Set<Post>(this._posts);
     }
 
     isSubscribedTo(subscribable: Subscribable): boolean {
@@ -64,11 +64,11 @@ export class User implements Userable {
         return new Set<Subscription>(this._subscriptions);
     }
 
-    private addPost(post : Postable) : void{
+    private addPost(post : Post) : void{
         this._posts.add(post);
     }
 
-    public removePost(post : Postable) : void{
+    public removePost(post : Post) : void{
         this._posts.delete(post);
     }
 

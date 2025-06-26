@@ -1,18 +1,18 @@
-import {Postable} from "../postable/Postable.interface";
 import { Observer } from "../subscription/Observer.interface";
 import {Subscribable} from "./Subscribable.interface";
+import {Post} from "../postable/Post";
 
 export class Wall implements Subscribable {
     private _titel: string;
     private _description: string;
-    private _posts: Set<Postable>;
+    private _posts: Set<Post>;
     private _subscribers: number;
     private _observers: Set<Observer>
 
     constructor(titel: string, description: string) {
         this._titel = titel;
         this._description = description;
-        this._posts = new Set<Postable>();
+        this._posts = new Set<Post>();
         this._subscribers = 0;
         this._observers = new Set<Observer>();
     }
@@ -25,11 +25,11 @@ export class Wall implements Subscribable {
         this._subscribers--;
     }
 
-    public addPostable(post : Postable) : void {
+    public addPostable(post : Post) : void {
         this._posts.add(post);
     }
 
-    public removePostable(post : Postable) : void {
+    public removePostable(post : Post) : void {
         this._posts.delete(post)
     }
 
@@ -53,8 +53,8 @@ export class Wall implements Subscribable {
         return this._description;
     }
 
-    get getPosts(): Set<Postable> {
-        return new Set<Postable>(this._posts);
+    get getPosts(): Set<Post> {
+        return new Set<Post>(this._posts);
     }
 
     get getSubscribers(): number {
