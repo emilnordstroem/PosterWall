@@ -4,6 +4,7 @@ import {Subscribable} from "../models/subscribable/Subscribable.interface";
 import {Userable} from "../models/userable/Userable.interface";
 import {Observer} from "../models/subscription/Observer.interface";
 import {Post} from "../models/postable/Post";
+import {Subscription} from "../models/subscription/Subscription";
 
 export class Controller {
 
@@ -27,11 +28,13 @@ export class Controller {
         return newWall;
     }
 
-    public subscribeTo(user : Userable, subscribable : Subscribable) : void {
+    public subscribeTo(user : Userable, subscribable : Subscribable) : Subscription | undefined {
         if (!user.isSubscribedTo(subscribable)) {
-            user.createSubscription(subscribable);
+            const subscription : Subscription = user.createSubscription(subscribable);
             subscribable.addSubscriber();
+            return subscription;
         }
+        return undefined;
     }
 
     public turnOnNotifications (observer : Observer, subscribable : Subscribable) : void {

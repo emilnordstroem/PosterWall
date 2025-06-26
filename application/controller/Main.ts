@@ -9,21 +9,15 @@ const controller : Controller = new Controller();
 const user : User = controller.createUser("Emil", new Date());
 const post : Post = controller.createPost(user, "Hello, World!");
 const wall : Wall = controller.createWall("Q/A Coding", "Post questions about coding");
-const subscription : Subscription = user.createSubscription(wall);
 
+const subscription : Subscription | undefined = controller.subscribeTo(user, wall);
 controller.postOnWall(user, post, wall);
-console.log(wall.getSubscribers + " Number of posts: " + wall.getPosts.size)
+console.log("Should show a subscriber: " + wall.getSubscribers + " Number of posts: " + wall.getPosts.size)
 
-controller.subscribeTo(user, wall);
-wall.addObserver(subscription);
-controller.postOnWall(user, post, wall);
-console.log(wall.getSubscribers + " Number of posts: " + wall.getPosts.size)
+if (subscription instanceof Subscription) {
+    controller.turnOnNotifications(subscription, subscription.getSubscribedTo);
+}
 
 controller.removeFromWall(user, post, wall);
 controller.unsubscribeFrom(user, wall);
-console.log(wall.getSubscribers + " Number of posts: " + wall.getPosts.size)
-
-
-
-
-
+console.log("Shouldn't show a subscriber: " + wall.getSubscribers + " Number of posts: " + wall.getPosts.size)
