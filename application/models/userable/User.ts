@@ -27,10 +27,6 @@ export class User implements Userable {
         this._posts.delete(post);
     }
 
-    getPosts(): Set<Post> {
-        return new Set<Post>(this._posts);
-    }
-
     isSubscribedTo(subscribable: Subscribable): boolean {
         let alreadySubscribed = false;
         this._subscriptions.forEach((currentSubscription : Subscription) => {
@@ -60,10 +56,6 @@ export class User implements Userable {
         this._subscriptions.delete(subscription);
     }
 
-    getSubscriptions(): Set<Subscription> {
-        return new Set<Subscription>(this._subscriptions);
-    }
-
     private addPost(post : Post) : void{
         this._posts.add(post);
     }
@@ -72,12 +64,19 @@ export class User implements Userable {
         this._posts.delete(post);
     }
 
-    get getUsername(): string {
+    get username(): string {
         return this._username;
     }
 
-    get getDateOfBirth(): Date {
+    get dateOfBirth(): Date {
         return this._dateOfBirth;
     }
 
+    get posts(): Set<Post> {
+        return this._posts;
+    }
+
+    get subscriptions(): Set<Subscription> {
+        return this._subscriptions;
+    }
 }

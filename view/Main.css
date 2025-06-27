@@ -1,0 +1,23 @@
+/* CSS for the textarea input field only */
+#post_content {
+    width: calc(100% - 20px); /* Full width minus padding */
+    max-width: 650px; /* Max width for larger screens */
+    min-height: 100px; /* Initial height */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 1em;
+    line-height: 1.5;
+    resize: vertical; /* Allow vertical resizing only */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Inner shadow for depth */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    /* Font for the input field itself */
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+#post_content:focus {
+    border-color: #3498db; /* Blue border on focus */
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); /* Light blue glow on focus */
+    outline: none; /* Remove default outline */
+}
