@@ -1,5 +1,5 @@
 
-class Post {
+export class Post {
     #content
     #date
 
@@ -23,16 +23,5 @@ class Post {
     set date (date) {
         this.#date = date
     } 
-
-    toJSON () {
-        return {
-            content: this.#content,
-            date: this.#date 
-        }
-    }
-
-    static fromJSON (objectToPost) {
-        return new Post(objectToPost.content, objectToPost.date)
-    }
 
 }

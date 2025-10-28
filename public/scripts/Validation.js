@@ -1,7 +1,6 @@
 
-
-function isPostContentValid (content) {
+export function isPostContentValid (content) {
     return content !== null 
-        && content instanceof String
+        && typeof content === 'string'
         && (content.length > 0 && content.length <= 280)
 }
