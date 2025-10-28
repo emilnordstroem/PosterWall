@@ -24,4 +24,12 @@ export class Post {
         this.#date = date
     } 
 
+    // enables JSON.Stringify() invoke
+    toJSON () {
+        return {
+            content: this.#content,
+            date: this.#date
+        }
+    }
+
 }
