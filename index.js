@@ -51,6 +51,7 @@ app.post('/', (request, response) => {
             text,
             new Date().toLocaleDateString
         )
+
     } catch (error) {
         console.error('Error occured: ', error.message)
         response.send('Add Post Error')
