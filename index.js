@@ -26,14 +26,14 @@ async function getPosts () {
     return posts
 }
 
-function getFrontPage () {
+function getHTML () {
     return path.join(__dirname, 'assets', 'index.html') //.join combines into readable path
 }
  
 // GET front page
 app.get('/', async (request, response) => {
     try {
-        const html = getFrontPage()
+        const html = getHTML()
         response.sendFile(html)
     } catch (error) {
         console.error('Error occured: ', error.message)
