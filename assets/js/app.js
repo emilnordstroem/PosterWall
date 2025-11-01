@@ -1,19 +1,21 @@
 
-
 function main () {
-
+    setHTMLBody(constructSignInPage())
 }
 
-function setWindow (page) {
-
+function setHTMLBody (page) {
+    document.body.innerHTML = page
 }
 
+function constructSignInPage () {
+    return getSignInSection() + getSignUpSection()
+}
 
 
 function getSignInSection () {
     return `<span id="userSignInSection">
         <form id="creatPostForm" action="/" method="POST">
-            <label for="username">
+            <label for="username" required>
                 Username:
             </label>
             <input type="username">
@@ -26,12 +28,12 @@ function getSignInSection () {
 function getSignUpSection () {
     return `<span id="userSignUpSection">
         <form id="creatPostForm" action="/" method="POST">
-            <label for="username">
+            <label for="username" required>
                 Username:
             </label>
-            <input type="username">
+            <input type="username" required>
 
-            <label for="dateOfBirth">
+            <label for="dateOfBirth" required>
                 Date of Birth:
             </label>
             <input type="date">
@@ -39,6 +41,10 @@ function getSignUpSection () {
             <button type="submit">Sign up</button>
         </form>
     </span>`
+}
+
+function constructHomePage () {
+    return getCreatePostSection
 }
 
 function getCreatePostSection(){
@@ -53,8 +59,11 @@ function getCreatePostSection(){
             Home
         </h3>
         <form id="creatPostForm" action="/" method="POST">
-            <textarea name="text" placeholder="What's on your mind?"></textarea>
+            <textarea name="text" placeholder="What's on your mind?" required></textarea>
             <button type="submit">Post</button>
         </form>
     </div>`
 }
+
+
+main()
