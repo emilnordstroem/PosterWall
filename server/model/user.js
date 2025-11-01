@@ -1,5 +1,4 @@
 
-
 class User {
     static globalIdentification = 0
     #id

@@ -1,15 +1,12 @@
 import User from '../model/user.js'
 
-
 function signUpUser (request, response) {
-
+    // TODO
 }
 
 function signInUser (request, response) {
-
+    // TODO
 }
-
-export default { signUpUser, signInUser }
 
 // CRUD Operations
 function createUser (id, username, dateOfBirth) {
@@ -31,3 +28,7 @@ function modifyUser () {
 function deleteUser () {
     // TODO
 }
+
+
+
+export default { signUpUser, signInUser }
