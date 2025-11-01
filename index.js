@@ -2,7 +2,7 @@ import express from 'express'
 import fs from 'fs/promises'
 import path from 'path'
 import {fileURLToPath} from 'url'
-import Post from './assets/js/post.js'
+import Post from './assets/js/models/post.js'
 
 // pointer (import.meta.url) to current module file (index.js)
 // fileURLToPath function converts url to path
@@ -27,7 +27,7 @@ async function getPosts () {
 }
 
 function getFrontPage () {
-    return path.join(__dirname, 'assets', 'html', 'index.html') //.join combines into readable path
+    return path.join(__dirname, 'assets', 'index.html') //.join combines into readable path
 }
  
 // GET front page
