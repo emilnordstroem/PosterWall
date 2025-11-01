@@ -5,17 +5,17 @@ import {fileURLToPath} from 'url'
 // pointer (import.meta.url) to current module file (index.js)
 // fileURLToPath function converts url to path
 const __filename = fileURLToPath(import.meta.url)
-// parent folder of current file (/posterwall)
+// parent folder of current file (/server)
 const __dirname = path.dirname(__filename)
 
 const app = express()
 const port = 10000
 
 // middleware - serves only the client (browser)
-app.use(express.static('assets'))
+app.use(express.static('../assets'))
 
 function getHTML () {
-    return path.join(__dirname, 'assets', 'index.html') //.join combines into readable path
+    return path.join(__dirname, 'view', 'index.html') //.join combines into readable path
 }
  
 // GET html file
@@ -29,11 +29,17 @@ app.get('/', async (request, response) => {
     }
 })
 
+// POST on sign in
+app.post('/signin', (request, response) => {
+    const { username } = request.body
+    
+})
 
-
-
-
-
+// POST on sign up
+app.post('/signup', (request, response) => {
+    const {username, dateOfBirth} = request.body
+    
+})
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)

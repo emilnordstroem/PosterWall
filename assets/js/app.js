@@ -1,3 +1,5 @@
+// app.js is an entry point (initiating and handling events) to the application
+
 import { getSignInSection } from './view/signInSection.js'
 import { getSignUpSection } from './view/signUpSection.js'
 import { getCreatePostSection } from './view/createPostSection.js'
