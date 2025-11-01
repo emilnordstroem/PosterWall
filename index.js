@@ -1,4 +1,5 @@
 import express from 'express'
+import fs from 'fs/promises'
 import path from 'path'
 import {fileURLToPath} from 'url'
 import Post from './assets/js/post.js'
@@ -16,10 +17,13 @@ const port = 10000
 app.use(express.static('assets'))
 
 async function getPosts () {
-    const data = path.join(__dirname, 'posts.json')
-    const post = JSON.stringify(data)
-    console.log(post)
-    return post
+    const data = await fs.readFile(
+        path.join(__dirname, 'posts.json'),
+        'utf-8'
+    )
+    const json = JSON.parse(data)
+    const posts = json.posts
+    return posts
 }
 
 function getFrontPage () {
@@ -40,10 +44,12 @@ app.get('/', async (request, response) => {
 // POST post
 app.post('/', (request, response) => {
     try {
-        const text = request.body
+        const {postedBy, postedTo, text} = request.body
         const post = new Post(
-            null,
-            text
+            postedBy,
+            postedTo,
+            text,
+            new Date().toLocaleDateString
         )
     } catch (error) {
         console.error('Error occured: ', error.message)
@@ -57,7 +63,6 @@ app.post('/', (request, response) => {
         response.send('Loading Error')
     }
 })
-
 
 
 app.listen(port, () => {

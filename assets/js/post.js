@@ -2,15 +2,11 @@
 class Post {
     static globalIdentification = 0
 
-    constructor (id, username, postedTo, text) {
-        if (id == null) {
-            this.id = Post.globalIdentification++
-        } else {
-            this.id = id
-        }
-        this.username = username
+    constructor (postedBy, postedTo, text, date) {
+        this.postedBy = postedBy
         this.postedTo = postedTo
         this.text = text
+        this.date = date
     }
 
 }
