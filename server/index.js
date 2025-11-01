@@ -1,6 +1,7 @@
 import express from 'express'
 import path from 'path'
 import {fileURLToPath} from 'url'
+import userController from './controller/userController'
 
 // pointer (import.meta.url) to current module file (index.js)
 // fileURLToPath function converts url to path
@@ -21,8 +22,7 @@ function getHTML () {
 // GET html file
 app.get('/', async (request, response) => {
     try {
-        const html = getHTML()
-        response.sendFile(html)
+        response.sendFile(getHTML())
     } catch (error) {
         console.error('Error occured: ', error.message)
         response.send('Loading Error')
@@ -30,16 +30,10 @@ app.get('/', async (request, response) => {
 })
 
 // POST on sign in
-app.post('/signin', (request, response) => {
-    const { username } = request.body
-    
-})
+app.post('/signin', (request, response) => userController.signInUser(request, response))
 
 // POST on sign up
-app.post('/signup', (request, response) => {
-    const {username, dateOfBirth} = request.body
-    
-})
+app.post('/signup', (request, response) => userController.signUpUser(request, response))
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)

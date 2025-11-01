@@ -1,5 +1,17 @@
 import User from '../model/user.js'
 
+
+function signUpUser (request, response) {
+
+}
+
+function signInUser (request, response) {
+
+}
+
+export default { signUpUser, signInUser }
+
+// CRUD Operations
 function createUser (id, username, dateOfBirth) {
     if (username == null || dateOfBirth == null) {
         throw new error (`Illegal username: ${username} or dateofbirth: ${dateOfBirth}`) 
@@ -9,5 +21,13 @@ function createUser (id, username, dateOfBirth) {
 }
 
 function readUsers () {
-    // TODO - read users and return relevant values to client
+    // TODO
+}
+
+function modifyUser () {
+    // TODO
+}
+
+function deleteUser () {
+    // TODO
 }
