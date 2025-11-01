@@ -1,5 +1,4 @@
 
-
 class Wall {
     static globalIdentification = 0
 
