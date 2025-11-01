@@ -1,6 +1,5 @@
 
 class Post {
-    static globalIdentification = 0
 
     constructor (postedBy, postedTo, text, date) {
         this.postedBy = postedBy
