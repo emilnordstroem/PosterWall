@@ -1,7 +1,7 @@
 
 export function getSignUpSection () {
     return `<span id="userSignUpSection">
-        <form id="creatPostForm" action="/" method="POST">
+        <form id="creatPostForm" action="/signup" method="POST">
             <label for="username">
                 Username:
             </label>
