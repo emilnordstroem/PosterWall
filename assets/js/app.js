@@ -15,10 +15,10 @@ function constructSignInPage () {
 function getSignInSection () {
     return `<span id="userSignInSection">
         <form id="creatPostForm" action="/" method="POST">
-            <label for="username" required>
+            <label for="username">
                 Username:
             </label>
-            <input type="username">
+            <input type="username" required>
 
             <button type="submit">Sign in</button>
         </form>
@@ -28,15 +28,15 @@ function getSignInSection () {
 function getSignUpSection () {
     return `<span id="userSignUpSection">
         <form id="creatPostForm" action="/" method="POST">
-            <label for="username" required>
+            <label for="username">
                 Username:
             </label>
             <input type="username" required>
 
-            <label for="dateOfBirth" required>
+            <label for="dateOfBirth">
                 Date of Birth:
             </label>
-            <input type="date">
+            <input type="date" required>
 
             <button type="submit">Sign up</button>
         </form>
