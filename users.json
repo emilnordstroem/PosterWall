@@ -1,5 +1,14 @@
 {
-    "users" : [
-        
-    ]
+  "users": [
+    {
+      "id": 0,
+      "username": "emil",
+      "dateOfBirth": "2002-12-13"
+    },
+    {
+      "id": 1,
+      "username": "mathilde",
+      "dateOfBirth": "1993-06-15"
+    }
+  ]
 }

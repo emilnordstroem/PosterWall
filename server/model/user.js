@@ -31,6 +31,15 @@ class User {
         this.#username = username
     }
 
+    // invoked by stringify()
+    toJSON () {
+        return {
+            id: this.#id,
+            username: this.#username,
+            dateOfBirth: this.#dateOfBirth
+        }
+    }
+
 }
 
 export default User

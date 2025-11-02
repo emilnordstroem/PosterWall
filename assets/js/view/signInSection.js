@@ -5,7 +5,7 @@ export function getSignInSection () {
             <label for="username">
                 Username:
             </label>
-            <input type="username" required>
+            <input name="username" required>
 
             <button type="submit">Sign in</button>
         </form>

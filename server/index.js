@@ -1,7 +1,7 @@
 import express from 'express'
 import path from 'path'
 import {fileURLToPath} from 'url'
-import userController from './controller/userController'
+import userController from './controller/userController.js'
 
 // pointer (import.meta.url) to current module file (index.js)
 // fileURLToPath function converts url to path
@@ -13,6 +13,7 @@ const app = express()
 const port = 10000
 
 // middleware - serves only the client (browser)
+app.use(express.urlencoded({ extended: true })); // parse form data from client
 app.use(express.static('../assets'))
 
 function getHTML () {
@@ -30,10 +31,22 @@ app.get('/', async (request, response) => {
 })
 
 // POST on sign in
-app.post('/signin', (request, response) => userController.signInUser(request, response))
+app.post('/signin', (request, response) => {
+    userController.signInUser(request, response)
+})
 
 // POST on sign up
-app.post('/signup', (request, response) => userController.signUpUser(request, response))
+app.post('/signup', async (request, response) => {
+    console.log('Received request.body:', request.body)
+    const { username, dateOfBirth } = request.body
+    try {
+        await userController.signUpUser(username, dateOfBirth)
+        response.send('signup succeeded')       
+    } catch (error) {
+        console.error(`signup error: ${error.message}`)
+        response.sendFile(getHTML())
+    }
+})
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)

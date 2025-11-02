@@ -5,12 +5,12 @@ export function getSignUpSection () {
             <label for="username">
                 Username:
             </label>
-            <input type="username" required>
+            <input name="username" type="text" required />
 
             <label for="dateOfBirth">
                 Date of Birth:
             </label>
-            <input type="date" required>
+            <input name="dateOfBirth" type="date" required />
 
             <button type="submit">Sign up</button>
         </form>
