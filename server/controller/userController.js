@@ -8,7 +8,7 @@ import User from '../model/user.js'
 const __filename = fileURLToPath(import.meta.url)
 // parent folder of current file (/server)
 const __dirname = path.dirname(__filename)
-
+// from server to root to users.json
 const usersFilePath = path.join(__dirname, '../../users.json')
 
 function signInUser (request, response) {
@@ -77,8 +77,12 @@ function modifyUser () {
     // TODO
 }
 
-function deleteUser () {
+async function deleteUser (user) {
     // TODO
+    const users = await readUsers()
+    users.filter(currentUser => currentUser.id != user.id)
+    storeUsers(users)
+    return user
 }
 
 
@@ -90,8 +94,8 @@ async function addUserToUsers (user) {
 
 
 async function storeUsers (users) {
-    const date = { users }
-    const json = JSON.stringify(date, null, 2)
+    const data = { users }
+    const json = JSON.stringify(data, null, 2)
     try {
         await fs.writeFile(
             usersFilePath,
