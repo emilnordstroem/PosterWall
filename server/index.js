@@ -12,9 +12,6 @@ const port = 10000
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-console.log('__dirname:', __dirname)
-console.log('assets path:', join(__dirname, '..', 'assets'))
-
 // middleware - serves only the client (browser)
 app.use(morgan('short'))
 app.use(express.static(join(__dirname, '..', 'assets')))
@@ -25,12 +22,9 @@ app.use(bodyParser.urlencoded(
 // decode converts body to json
 app.use(bodyParser.json())
 
-
 app.get('/', (request, response) => {
     response.redirect('/index.html')
 })
-
-app.post('/signin', (request, response) => {})
 
 app.post('/signup', signUpRender)
 
