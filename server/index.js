@@ -1,51 +1,41 @@
 import express from 'express'
-import path from 'path'
-import {fileURLToPath} from 'url'
-import userController from './controller/userController.js'
+import morgan from 'morgan'
+import bodyParser from 'body-parser'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
 
-// pointer (import.meta.url) to current module file (index.js)
-// fileURLToPath function converts url to path
-const __filename = fileURLToPath(import.meta.url)
-// parent folder of current file (/server)
-const __dirname = path.dirname(__filename)
+import signUpRender from './controller/signUpController.js'
 
 const app = express()
 const port = 10000
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+console.log('__dirname:', __dirname)
+console.log('assets path:', join(__dirname, '..', 'assets'))
+
 // middleware - serves only the client (browser)
-app.use(express.urlencoded({ extended: true })); // parse form data from client
-app.use(express.static('../assets'))
+app.use(morgan('short'))
+app.use(express.static(join(__dirname, '..', 'assets')))
+// decode post request from client
+app.use(bodyParser.urlencoded(
+    {extended: true} // tilader specialtegn (" ", =, %, ø, ^* osv)
+))
+// decode converts body to json
+app.use(bodyParser.json())
 
-function getHTML () {
-    return path.join(__dirname, 'view', 'index.html') //.join combines into readable path
-}
- 
-// GET html file
-app.get('/', async (request, response) => {
-    try {
-        response.sendFile(getHTML())
-    } catch (error) {
-        console.error('Error occured: ', error.message)
-        response.send('Loading Error')
-    }
+
+app.get('/', (request, response) => {
+    response.redirect('/index.html')
 })
 
-// POST on sign in
-app.post('/signin', (request, response) => {
-    userController.signInUser(request, response)
-})
+app.post('/signin', (request, response) => {})
 
-// POST on sign up
-app.post('/signup', async (request, response) => {
-    console.log('Received request.body:', request.body)
-    const { username, dateOfBirth } = request.body
-    try {
-        await userController.signUpUser(username, dateOfBirth)
-        response.send('signup succeeded')       
-    } catch (error) {
-        console.error(`signup error: ${error.message}`)
-        response.sendFile(getHTML())
-    }
+app.post('/signup', signUpRender)
+
+app.use((request, response, next) => {
+    response.status(404).send('Unknown URL input')
 })
 
 app.listen(port, () => {

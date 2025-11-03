@@ -31,12 +31,11 @@ async function signUpUser (username, dateOfBirth) {
 
 async function doesUsernameAlreadyExist (username) {
     const users = await readUsers()
-    for (const user of users) {
-        if (user.username.toLowerCase() == username.toLowerCase()) {
-            return true
-        }
+    users.find(user => user.username.toLowerCase() == username.toLowerCase())
+    if (!users) {
+        return false
     }
-    return false
+    return true
 }
 
 function isDateOfBirthAllowed (dateOfBirth) {
@@ -51,7 +50,6 @@ function isDateOfBirthAllowed (dateOfBirth) {
     
     return inputDateOfBirth <= minimumAllowedDateOfBirth
 }
-
 
 // CRUD Operations
 function createUser (id, username, dateOfBirth) {
