@@ -18,6 +18,9 @@ app.use(bodyParser.urlencoded(
 app.use(bodyParser.json())
 
 app.get('/', (request, response) => {
+    if () {
+
+    }
     response.render('index')
 })
 
