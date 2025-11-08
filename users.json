@@ -1,5 +1,9 @@
 {
   "users": [
-    
+    {
+      "id": 0,
+      "username": "Emil",
+      "dateOfBirth": "2002-12-13"
+    }
   ]
 }
