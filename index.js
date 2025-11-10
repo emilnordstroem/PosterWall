@@ -3,17 +3,21 @@ import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 
-import signUpRender from './views/controller/signUpController.js'
+import logInRouter from './views/routes/logInRouter.js'
+import signUpRouter from './views/routes/signUpRouter.js'
 
 const app = express()
 const port = 10000
 
 app.use(
     session({
-        secret: 'user',
+        secret: 'dummySession',
         resave: false,
         saveUninitialized: false,
-        cookie: { secure: false }
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, 
+            secure: false 
+        }
     })
 )
 
@@ -28,20 +32,22 @@ app.use(bodyParser.urlencoded(
 app.use(bodyParser.json())
 
 app.get('/', (request, response) => {
-    if (request.session.user) {
+    if (request.session.isUserLoggedIn) {
         response.redirect('/home')
     } else {
         response.render('index')
     }
 })
 
-app.post('/signup', signUpRender)
+app.post('/login', logInRouter)
+app.post('/signup', signUpRouter)
+
 
 app.get('/home', (request, response) => {
-    if (request.session.user) {
+    if (request.session.isUserLoggedIn) {
         response.render(
             'home',
-            { user: request.session.user } 
+            { user: request.session.user.username } 
         )
     } else {
         response.render('index')

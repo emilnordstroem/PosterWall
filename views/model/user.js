@@ -3,16 +3,20 @@ class User {
     static globalIdentification = 0
     #id
     #username
+    #email
     #dateOfBirth
+    #password
 
-    constructor (id, username, dateOfBirth) {
+    constructor (id, username, email, dateOfBirth, password) {
         if (id == null) {
             this.#id = User.globalIdentification++
         } else {
             this.#id = id
         }
         this.#username = username
+        this.#email = email
         this.#dateOfBirth = dateOfBirth
+        this.#password = password
     }
 
     get id () {
@@ -23,20 +27,42 @@ class User {
         return this.#username
     }
 
+    get email () {
+        return this.#email
+    }
+
     get dateOfBirth () {
         return this.#dateOfBirth
+    }
+
+    get password () {
+        return this.#password
     }
 
     set username (username) {
         this.#username = username
     }
 
+    set email (email) {
+        this.#email = email
+    }
+
+    set dateOfBirth (dateOfBirth) {
+        this.#dateOfBirth = dateOfBirth
+    }
+
+    set password (password) {
+        this.#password = password
+    } 
+
     // invoked by stringify()
     toJSON () {
         return {
             id: this.#id,
             username: this.#username,
-            dateOfBirth: this.#dateOfBirth
+            email: this.#email,
+            dateOfBirth: this.#dateOfBirth,
+            password: this.#password
         }
     }
 

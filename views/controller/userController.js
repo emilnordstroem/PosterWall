@@ -15,11 +15,8 @@ export class UserController {
     }
 
     // CRUD operations
-    createUser (id, username, dateOfBirth) {
-        if (username == null || dateOfBirth == null) {
-            throw new Error (`illegal username: ${username} or dateofbirth: ${dateOfBirth}`) 
-        }
-        return new User(id, username, dateOfBirth)
+    createUser (id, username, email, dateOfBirth, password) {
+        return new User(id, username, email, dateOfBirth, password)
     }
 
     async readUsers () {
@@ -33,7 +30,11 @@ export class UserController {
         const users = json.users
         return users  
     }   
-    
+
+    async findUserBasedOnUsername (username, users) {
+        return users.some(user => user.username == username)
+    }
+
     async modifyUser () {
         // TODO
     }
@@ -43,6 +44,21 @@ export class UserController {
         users.filter(currentUser => currentUser.id != user.id)
         storeUsers(users)
         return user
+    }
+
+    // Check for conditions
+    async doesUsernameAlreadyExist (username, users) {
+        const found = users.some(
+            user => user.username.toLowerCase() === username.toLowerCase()
+        )
+        return found
+    }
+
+    async doesEmailAlreadyExist (email, users) {
+        const found = users.some(
+            user => user.email.toLowerCase() === email.toLowerCase()
+        )
+        return found
     }
 
     // storage operations
