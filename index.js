@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 
+import homeRouter from './views/routes/homeRouter.js'
 import logInRouter from './views/routes/logInRouter.js'
 import signUpRouter from './views/routes/signUpRouter.js'
 
@@ -27,40 +28,25 @@ app.use(morgan('short'))
 app.use(express.static('/assets'))
 
 app.use(bodyParser.urlencoded(
-    { extended: true } // tilader specialtegn (" ", =, %, ø, ^* osv)
+    { extended: true } // tilader specialtegn (" ", =, %, ø, ^* osv) i body
 ))
 app.use(bodyParser.json())
 
-app.get('/', (request, response) => {
-    if (request.session.isUserLoggedIn) {
-        response.redirect('/home')
-    } else {
-        response.render('index')
-    }
-})
+
+app.get('/', homeRouter)
 
 app.post('/login', logInRouter)
+
 app.post('/signup', signUpRouter)
 
+app.get('/home', homeRouter)
 
-app.get('/home', (request, response) => {
-    if (request.session.isUserLoggedIn) {
-        response.render(
-            'home',
-            { user: request.session.user.username } 
-        )
-    } else {
-        response.render('index')
-    }
-})
+app.get('/logout', homeRouter)
 
-app.get('/logout', (request, response) => {
-    request.session.destroy()
-    response.redirect('/')
-})
 
 app.use((request, response, next) => {
     response.status(404).send('Unknown URL input')
 })
+
 
 app.listen(port, () => console.log(`http://localhost:${port}`))
