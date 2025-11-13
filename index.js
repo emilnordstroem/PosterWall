@@ -54,6 +54,11 @@ app.get('/home', (request, response) => {
     }
 })
 
+app.get('/logout', (request, response) => {
+    request.session.destroy()
+    response.redirect('/')
+})
+
 app.use((request, response, next) => {
     response.status(404).send('Unknown URL input')
 })

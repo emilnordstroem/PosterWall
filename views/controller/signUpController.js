@@ -15,8 +15,9 @@ function isDateOfBirthAllowed (dateOfBirth) {
 
 async function signUpUser (username, email, dateOfBirth, password) {
     const users = await controller.readUsers()
-    
-    if (!username || !email || !dateOfBirth || !password) {
+
+    try {
+        if (!username || !email || !dateOfBirth || !password) {
         throw new Error (`illegal username: ${username}, email: ${email}, dateOfBirth: ${dateOfBirth}, or password: ${password}`) 
     } else if (await controller.doesUsernameAlreadyExist(username, users)) {
         throw new Error (`username already exist: ${username}`) 
@@ -24,6 +25,9 @@ async function signUpUser (username, email, dateOfBirth, password) {
         throw new Error (`email already exist: ${email}`)
     } else if (!isDateOfBirthAllowed(dateOfBirth)) {
         throw new Error (`date of birth isn't allowed (${dateOfBirth})`) 
+    }
+    } catch (error) {
+        console.error(`signUpUser error: ${error.message}`)
     }
 
     const user = controller.createUser(null, username, email, dateOfBirth, password)
