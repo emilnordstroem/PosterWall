@@ -1,4 +1,5 @@
 import controller from './userController.js'
+import cryption from 'bcrypt'
 
 function isDateOfBirthAllowed (dateOfBirth) {
     const inputDateOfBirth = new Date(dateOfBirth)
@@ -11,6 +12,11 @@ function isDateOfBirthAllowed (dateOfBirth) {
     )
     
     return inputDateOfBirth <= minimumAllowedDateOfBirth
+}
+
+function encryptPassword (unEncryptedPassword) {
+    const salt = cryption.genSaltSync(13)
+    return cryption.hashSync(unEncryptedPassword, salt)
 }
 
 async function signUpUser (username, email, dateOfBirth, password) {
@@ -30,6 +36,7 @@ async function signUpUser (username, email, dateOfBirth, password) {
         console.error(`signUpUser error: ${error.message}`)
     }
 
+    password = encryptPassword(password)
     const user = controller.createUser(null, username, email, dateOfBirth, password)
     const newUsersList = await controller.addUserToUsers(user)
     await controller.storeUsers(newUsersList)
