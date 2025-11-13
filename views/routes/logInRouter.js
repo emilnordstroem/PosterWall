@@ -18,8 +18,8 @@ router.post('/login', async (request, response) => {
         }
         response.redirect('/index')
     } catch (error) {
-        console.error(`log in error: ${error.message}`)
-        response.render('index')
+        console.error(`login error: ${error.message}`)
+        response.redirect('index')
     }
 })
 

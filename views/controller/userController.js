@@ -31,10 +31,6 @@ export class UserController {
         return users  
     }   
 
-    async findUserBasedOnUsername (username, users) {
-        return users.some(user => user.username == username)
-    }
-
     async modifyUser () {
         // TODO
     }

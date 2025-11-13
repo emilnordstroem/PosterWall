@@ -66,6 +66,16 @@ class User {
         }
     }
 
+    static fromJSON (object) {
+        return new User(
+            object.id,
+            object.username,
+            object.email,
+            object.dateOfBirth,
+            object.password
+        )
+    }
+
 }
 
 
