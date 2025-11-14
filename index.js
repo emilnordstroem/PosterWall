@@ -2,6 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import session from 'express-session'
+import fs from 'fs/promises'
 
 import homeRouter from './views/routes/homeRouter.js'
 import logInRouter from './views/routes/logInRouter.js'
@@ -12,7 +13,7 @@ const port = 10000
 
 app.use(
     session({
-        secret: 'dummySession',
+        secret: fs.readFile('./secret.txt', 'utf-8'),
         resave: false,
         saveUninitialized: false,
         cookie: {
