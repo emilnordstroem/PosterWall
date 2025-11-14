@@ -13,12 +13,11 @@ router.post('/login', async (request, response) => {
         if (user) {
             request.session.isUserLoggedIn = true
             request.session.user = user
-            response.redirect('/home')
         }
-        response.redirect('/')
+        response.send(user)
     } catch (error) {
         console.error(`login error: ${error.message}`)
-        response.redirect('/')
+        response.sendStatus(401)
     }
 })
 

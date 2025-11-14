@@ -11,9 +11,11 @@ router.post('/signup', async (request, response) => {
             email, 
             dateOfBirth, 
             password
-        )  
-        request.session.isUserLoggedIn = true
-        request.session.user = user
+        )
+        if (user) {
+            request.session.isUserLoggedIn = true
+            request.session.user = user
+        }  
         response.send(user)
     } catch (error) {
         console.error(`signup error: ${error.message}`)

@@ -1,5 +1,18 @@
 {
   "users": [
-    
+    {
+      "id": 1,
+      "username": "emilnordstroem",
+      "email": "eeeeee",
+      "dateOfBirth": "1988-06-08",
+      "password": "$2b$13$CT/5.p3Z568g./X2EuDSF.oKDdUO9fZM1uiqWm1E59KQj54whcsdW"
+    },
+    {
+      "id": 2,
+      "username": "emil695q",
+      "email": "emilstoeve@icloud.com",
+      "dateOfBirth": "2002-12-13",
+      "password": "$2b$13$yMTGha5ZCEXHFO6cHlxY8.C5uVa4N5KjN9FerH4JfXOdAPPkk8ohi"
+    }
   ]
 }
