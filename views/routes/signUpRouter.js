@@ -14,10 +14,10 @@ router.post('/signup', async (request, response) => {
         )  
         request.session.isUserLoggedIn = true
         request.session.user = user
-        response.redirect('/home')
+        response.send(user)
     } catch (error) {
         console.error(`signup error: ${error.message}`)
-        response.redirect('/')
+        response.sendStatus(401)
     }
 })
 

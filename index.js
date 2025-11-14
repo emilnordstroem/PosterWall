@@ -26,7 +26,7 @@ app.use(
 app.set('view engine', 'pug')
 
 app.use(morgan('short'))
-app.use(express.static('/assets'))
+app.use(express.static('assets'))
 
 app.use(bodyParser.urlencoded(
     { extended: true } // tilader specialtegn (" ", =, %, ø, ^* osv) i HTTP body

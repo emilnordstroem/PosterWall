@@ -1,11 +1,14 @@
 div#userSignUpSection
-    form(action="/signup", method="post") 
-        label Username:
-            input(type="text", name="username" required)
-        label Email:
-            input(type="email", name="email" required)
-        label Date of Birth:
-            input(type="date", name="dateOfBirth" required)
-        label Password:
-            input(type="password", name="password" required)
-        input(type="submit", value="Sign up") 
+    label(for="username") Username:
+    input.signupInput(type="text", name="username" required)
+    
+    label(for="email") Email:
+    input.signupInput(type="email", name="email" required)
+    
+    label(for="dateOfBirth") Date of Birth:
+    input.signupInput(type="date", name="dateOfBirth" required)
+    
+    label(for="password") Password:
+    input.signupInput(type="password", name="password" required)
+    
+    button#signUpButton(type="button") Sign Up

@@ -1,6 +1,6 @@
 
 class User {
-    static globalIdentification = 0
+    static globalIdentification = 1
     #id
     #username
     #email
