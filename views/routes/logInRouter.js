@@ -4,7 +4,6 @@ import logInUserAuthentication from '../controller/logInController.js'
 const router = express.Router()
 
 router.post('/login', async (request, response) => {
-    console.log('Received request.body:', request.body)
     const { username, password } = request.body
     try {
         const user = await logInUserAuthentication (
@@ -16,10 +15,10 @@ router.post('/login', async (request, response) => {
             request.session.user = user
             response.redirect('/home')
         }
-        response.redirect('/index')
+        response.redirect('/')
     } catch (error) {
         console.error(`login error: ${error.message}`)
-        response.redirect('index')
+        response.redirect('/')
     }
 })
 

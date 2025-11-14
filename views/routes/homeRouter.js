@@ -2,11 +2,13 @@ import express from "express";
 
 const router = express.Router();
 
+const title = 'posterwall'
+
 router.get('/', (request, response) => {
-    if (request.session.isUserLoggedIn) {
-        response.redirect('/home')
+    if (!request.session.isUserLoggedIn) {
+        response.render('login')
     } else {
-        response.render('index')
+        response.redirect('/home')
     }
 })
 
@@ -14,10 +16,13 @@ router.get('/home', (request, response) => {
     if (request.session.isUserLoggedIn) {
         response.render(
             'home',
-            { user: request.session.user.username } 
+            {
+                title: title,
+                user: request.session.user.username 
+            } 
         )
     } else {
-        response.render('index')
+        response.redirect('/')
     }
 })
 

@@ -13,7 +13,7 @@ const port = 10000
 
 app.use(
     session({
-        secret: fs.readFile('./secret.txt', 'utf-8'),
+        secret: await fs.readFile('./secret.txt', 'utf-8'),
         resave: false,
         saveUninitialized: false,
         cookie: {
@@ -29,7 +29,7 @@ app.use(morgan('short'))
 app.use(express.static('/assets'))
 
 app.use(bodyParser.urlencoded(
-    { extended: true } // tilader specialtegn (" ", =, %, ø, ^* osv) i body
+    { extended: true } // tilader specialtegn (" ", =, %, ø, ^* osv) i HTTP body
 ))
 app.use(bodyParser.json())
 
