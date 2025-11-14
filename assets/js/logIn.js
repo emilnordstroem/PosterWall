@@ -6,7 +6,6 @@ const logInButton = logInSection.querySelector('#logInButton')
 logInButton.addEventListener('click', logInHandler)
 
 async function logInHandler () {
-    console.log('logInHandler')
     const { username, password } = readInputElements()
 
     const user = await post('/login', {
@@ -20,7 +19,6 @@ async function logInHandler () {
 }
 
 function readInputElements () {
-    console.log('readInputElements')
     let username
     let password
 
@@ -41,7 +39,6 @@ function readInputElements () {
 }
 
 async function post(url, object) {
-    console.log('post(url, object)')
     const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

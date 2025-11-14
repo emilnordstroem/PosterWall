@@ -18,7 +18,7 @@ router.get('/home', (request, response) => {
             'home',
             {
                 title: title,
-                user: request.session.user.username 
+                user: request.session.user.username,
             } 
         )
     } else {
