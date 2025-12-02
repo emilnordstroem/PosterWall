@@ -1,3 +1,10 @@
-include includes/head
-include includes/logInSection
-include includes/signUpSection
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        script(src="/js/loginButton.js" defer) 
+        title login
+    body
+        #loginSection
+            input#usernameInput(type="text", placeholder="Username")
+            input#passwordInput(type="password", placeholder="Password (8+ characters)")
+            button#loginButton Log in
