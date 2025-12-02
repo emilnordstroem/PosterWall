@@ -7,11 +7,12 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const filePath = path.join(__dirname, '../database/users.json')
 
-export function createUser (id, username, password) {
+export function createUser (id, username, password, subscriptions) {
     const user = new User(
         id, 
         username, 
-        password
+        password,
+        subscriptions
     )
     return user
 }

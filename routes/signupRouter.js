@@ -10,7 +10,7 @@ router.get('/', (request, response) => {
 router.post('/', async (request, response) => {
     const { username, password } = request.body
     try {
-        const user = createUser(null, username, password)
+        const user = createUser(null, username, password, [])
         await saveUserToStorage(user)
         response.sendStatus(201)
     } catch (error) {

@@ -9,8 +9,15 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const filePath = path.join(__dirname, '../database/posterwalls.json')
 
-export function createPosterWall (id, title, description, createdByUser, posts) {
-    const posterwall = new PosterWall(id, title, description, createdByUser, posts)
+export function createPosterWall (id, title, description, createdByUser, posts, subscribers) {
+    const posterwall = new PosterWall(
+        id, 
+        title, 
+        description, 
+        createdByUser, 
+        posts, 
+        subscribers
+    )
     return posterwall
 }
 

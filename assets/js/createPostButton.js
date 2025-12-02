@@ -18,6 +18,7 @@ createPostButton.addEventListener('click', async () => {
 async function createPost (message, postedToPosterWall) {
     const response = await fetch(`/posterwall/${postedToPosterWall}`, {
         method: 'POST',
+        credentials: "include",
         body: JSON.stringify(
             {
                 message: message,

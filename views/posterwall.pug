@@ -1,9 +1,15 @@
 html(lang="en")
     head
         meta(charset="UTF-8")
-        script(src="/js/createPostButton.js" defer) 
+        script(type="module" src="/js/subscribeButton.js" defer)
+        script(type="module" src="/js/unscribeButton.js")  
+        script(type="module" src="/js/createPostButton.js" defer) 
         title posterwall/#{posterwall.id}
-    body 
+    body
+        if subscription
+            button#unsubscribeButton(data-posterWallId= posterwall.id, data-subscriptionId= subscription.id) Unsubscribe
+        else 
+            button#subscribeButton(data-posterWallId= posterwall.id) Subscribe
         #createPostSection
             textarea#messageInput(type="text", data-posterWallId= posterwall.id placeholder="What is on your mind?")
             button#createPostButton Post

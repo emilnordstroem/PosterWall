@@ -19,6 +19,7 @@ router.post('/', async (request, response) => {
         if (user) {
             request.session.userId = user.id
             request.session.username = user.username
+            request.session.subscriptions = user.subscriptions
             
             response.sendStatus(200)
         } else {

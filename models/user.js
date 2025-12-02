@@ -2,7 +2,7 @@
 export default class User {
     static #globalIdentification = 0
 
-    constructor (id, username, password) {
+    constructor (id, username, password, subscriptions) {
         if (!id) {
             this.id = ++User.#globalIdentification
         } else if (id >= User.#globalIdentification) {
@@ -13,6 +13,7 @@ export default class User {
         }
         this.username = username
         this.password = password
+        this.subscriptions = subscriptions
     }
 
 }

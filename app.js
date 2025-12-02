@@ -7,7 +7,7 @@ import fs from 'fs/promises'
 const app = express()
 const port = 10000
 
-const secret = await fs.readFile('./secret.txt')
+const secret = await fs.readFile('./secret.txt', 'utf-8')
 
 app.use(
     session(
@@ -28,11 +28,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const requireAuth = (request, response, next) => {
-  if (request.session.userId) {
-    next();
-  } else {
-    response.redirect("/signin");
-  }
+    if (request.session.userId) {
+      next();
+    } else {
+      response.redirect("/signin");
+    }
 }
 
 import signinRouter from './routes/signinRouter.js'
@@ -45,5 +45,5 @@ app.use(requireAuth)
 app.use('/posterwall', posterwallRouter)
 
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`)
+  console.log(`Server running on http://localhost:${port}`)
 })
