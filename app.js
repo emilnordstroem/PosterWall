@@ -25,15 +25,21 @@ app.use(express.static('assets'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-import signupRouter from './routes/signupRouter.js'
+const requireAuth = (request, response, next) => {
+  if (request.session.userId) {
+    next();
+  } else {
+    response.redirect("/signin");
+  }
+}
+
 import signinRouter from './routes/signinRouter.js'
+import signupRouter from './routes/signupRouter.js'
 import posterwallRouter from './routes/posterwallRouter.js'
 
-app.get('/', (request, response) => {
-    response.redirect('/signin')
-})
-app.use('/signup', signupRouter)
 app.use('/signin', signinRouter)
+app.use('/signup', signupRouter)
+app.use(requireAuth)
 app.use('/posterwall', posterwallRouter)
 
 app.listen(port, () => {
