@@ -25,7 +25,13 @@ app.use(express.static('assets'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+import loginRouter from './routes/loginRouter.js'
 
+
+app.get('/', (request, response) => {
+    response.redirect('/login')
+})
+app.use('/login', loginRouter)
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`)
