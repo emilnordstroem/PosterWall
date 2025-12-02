@@ -25,13 +25,12 @@ app.use(express.static('assets'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-import loginRouter from './routes/loginRouter.js'
-
+import signupRouter from './routes/signupRouter.js'
 
 app.get('/', (request, response) => {
-    response.redirect('/login')
+    response.redirect('/signup')
 })
-app.use('/login', loginRouter)
+app.use('/signup', signupRouter)
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`)
