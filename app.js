@@ -2,13 +2,16 @@ import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import session from 'express-session'
+import fs from 'fs/promises'
 
 const app = express()
 const port = 10000
 
+const secret = await fs.readFile('./secret.txt')
+
 app.use(
     session({
-        secret: 'dummySession',
+        secret: secret,
         resave: false,
         saveUninitialized: false,
     })
