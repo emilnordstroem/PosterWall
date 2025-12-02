@@ -82,7 +82,6 @@ router.post('/:id/subscribe', async (request, response) => {
 })
 
 router.delete('/:id/unsubscribe', async (request, response) => {
-    const posterwallId = parseInt(request.params.id)
     const { subscriptionId } = request.body
 
     const subscription = request.session.subscriptions.find(
