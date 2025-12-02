@@ -9,9 +9,14 @@ createPosterWallButton.addEventListener('click', async () => {
     const description = descriptionInput.value
 
     const response = await createPosterWall(title, description)
+    const result = await response.json()
+
+    if (response.ok) {
+        window.location.href = result.path
+    }
 
     titleInput.value = ''
-    descriptionInput = ''
+    descriptionInput.value = ''
 })
 
 async function createPosterWall (title, description) {

@@ -7,3 +7,7 @@ html(lang="en")
         #createPostSection
             textarea#messageInput(type="text", data-posterWallId= posterwall.id placeholder="What is on your mind?")
             button#createPostButton Post
+        #postsOverviewSection
+            each post in posterwall.posts
+                #postOverviewSection
+                    p= post.message

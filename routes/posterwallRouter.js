@@ -16,7 +16,7 @@ router.post('/', async (request, response) => {
     const posterwall = createPosterWall(null, title, description, request.session.userId, [])
     await savePosterWallToStorage(posterwall)
 
-    response.redirect(`/posterwall/${posterwall.id}`)
+    response.status(201).json({ path: `/posterwall/${posterwall.id}` })
 })
 
 router.get('/:id', async (request, response) => {
