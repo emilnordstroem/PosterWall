@@ -33,8 +33,7 @@ router.get('/:id', async (request, response) => {
     if (!posterwall) {
         response.redirect('/',)
     } else {
-        const subscriptions = request.session.subscriptions
-        const subscription = subscriptions.find(subscriber => subscriber.posterWallId === posterwallId)
+        const subscription = request.session.subscriptions.find(subscriber => subscriber.posterwallId === posterwallId)
 
         response.render('posterwall', 
             {
