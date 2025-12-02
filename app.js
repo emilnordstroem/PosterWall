@@ -26,11 +26,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 import signupRouter from './routes/signupRouter.js'
+import signinRouter from './routes/signinRouter.js'
 
 app.get('/', (request, response) => {
-    response.redirect('/signup')
+    response.redirect('/signin')
 })
 app.use('/signup', signupRouter)
+app.use('/signin', signinRouter)
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`)

@@ -27,7 +27,7 @@ export async function saveUserToStorage (user) {
     }
 }
 
-async function readUsers() {
+export async function readUsers() {
     try {
         const data = await fs.readFile(filePath, 'utf-8')
         const json = JSON.parse(data)
@@ -38,7 +38,7 @@ async function readUsers() {
     }
 }
 
-async function updateUsers(users) {
+export async function updateUsers(users) {
     try {
         const json = JSON.stringify(users, null, 2)
         await fs.writeFile(filePath, json, 'utf-8')
