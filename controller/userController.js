@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import { User } from "../models/user.js";
+import User from "../models/user.js";
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 

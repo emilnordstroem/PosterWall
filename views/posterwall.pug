@@ -1,0 +1,9 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        script(src="/js/createPostButton.js" defer) 
+        title posterwall/#{posterwall.id}
+    body 
+        #createPostSection
+            textarea#messageInput(type="text", data-posterWallId= posterwall.id placeholder="What is on your mind?")
+            button#createPostButton Post

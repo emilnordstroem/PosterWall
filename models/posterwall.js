@@ -1,8 +1,8 @@
 
-export class PosterWall {
+export default class PosterWall {
     static #globalIdentification = 0
 
-    constructor (id, title, description, createdByUser) {
+    constructor (id, title, description, createdByUser, posts) {
         if (!id) {
             this.id = ++PosterWall.#globalIdentification
         } else if (id >= PosterWall.#globalIdentification) {
@@ -14,5 +14,6 @@ export class PosterWall {
         this.title = title
         this.description = description
         this.createdByUser = createdByUser
+        this.posts = posts
     }
 }
