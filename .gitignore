@@ -1,4 +1,3 @@
 secret.docx
 secret.txt
-users.json
-*.log
+database/
