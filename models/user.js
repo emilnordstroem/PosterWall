@@ -1,5 +1,5 @@
 
-class User {
+export class User {
     static #globalIdentification = 0
 
     constructor (id, username, password) {
