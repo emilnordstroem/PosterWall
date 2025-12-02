@@ -27,12 +27,14 @@ app.use(bodyParser.json())
 
 import signupRouter from './routes/signupRouter.js'
 import signinRouter from './routes/signinRouter.js'
+import posterwallRouter from './routes/posterwallRouter.js'
 
 app.get('/', (request, response) => {
     response.redirect('/signin')
 })
 app.use('/signup', signupRouter)
 app.use('/signin', signinRouter)
+app.use('/posterwall', posterwallRouter)
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`)

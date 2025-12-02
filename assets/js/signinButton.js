@@ -13,6 +13,8 @@ signInButton.addEventListener('click', async () => {
         window.location.href = '/'
     }
 
+    usernameInput.value = ''
+    passwordInput.value = ''
 })
 
 async function signin (username, password) {
