@@ -10,11 +10,13 @@ const port = 10000
 const secret = await fs.readFile('./secret.txt')
 
 app.use(
-    session({
+    session(
+        {
         secret: secret,
         resave: false,
         saveUninitialized: false,
-    })
+      }
+    )
 )
 
 app.set('view engine', 'pug')
