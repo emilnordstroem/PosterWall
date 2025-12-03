@@ -1,0 +1,14 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        script(src="/js/signinButton.js" defer) 
+        script(src="/js/signUpLinkButton.js" defer) 
+        title signin
+    body
+        #signInSection
+            input#usernameInput(type="text", placeholder="Username")
+            input#passwordInput(type="password", placeholder="Password (8+ characters)")
+            button#signInButton Sign in
+        #signUpReference
+            p Not already a user?
+            button#signUpLinkButton Sign up 
